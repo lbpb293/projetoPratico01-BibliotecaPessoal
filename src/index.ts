@@ -92,3 +92,36 @@ removerLivro(titulos.length - 1);
 
 console.log("\n--- APÓS REMOÇÃO ---");
 exibirBiblioteca();
+
+function buscarPorTitulo(termo: string): number[] {
+  const resultados: number[] = [];
+
+  titulos.forEach((titulo, index) => {
+    if (titulo.toLowerCase().includes(termo.toLowerCase())) {
+      resultados.push(index);
+    }
+  });
+
+  return resultados;
+}
+
+console.log("\n=== BUSCA POR TÍTULO ===");
+const encontrados = buscarPorTitulo("o");
+
+console.log("Índices encontrados:", encontrados);
+
+encontrados.forEach((i) => {
+  console.log(`- ${titulos[i]}`);
+});
+
+function listarPorAutor(autor: string): string[] {
+  return autores
+    .map((a, index) => ({ autor: a, index }))
+    .filter((obj) => obj.autor.toLowerCase() === autor.toLowerCase())
+    .map((obj) => titulos[obj.index]);
+}
+
+console.log("\n=== LIVROS POR AUTOR ===");
+const livrosAutor = listarPorAutor("George Orwell");
+
+console.log(livrosAutor);
