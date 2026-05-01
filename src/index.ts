@@ -125,3 +125,43 @@ console.log("\n=== LIVROS POR AUTOR ===");
 const livrosAutor = listarPorAutor("George Orwell");
 
 console.log(livrosAutor);
+
+function marcarComoLido(indice: number, avaliacao: number): void {
+  if (indice < 0 || indice >= titulos.length) {
+    console.log("Índice inválido.");
+    return;
+  }
+
+  if (avaliacao < 1 || avaliacao > 5) {
+    console.log("Avaliação deve ser entre 1 e 5.");
+    return;
+  }
+
+  lido[indice] = true;
+  avaliacoes[indice] = avaliacao;
+
+  console.log(`Livro "${titulos[indice]}" marcado como lido.`);
+}
+
+function listarLidos(): string[] {
+  return lido
+    .map((status, index) => ({ status, index }))
+    .filter((obj) => obj.status === true)
+    .map((obj) => titulos[obj.index]);
+}
+
+function listarPendentes(): string[] {
+  return lido
+    .map((status, index) => ({ status, index }))
+    .filter((obj) => obj.status === false)
+    .map((obj) => titulos[obj.index]);
+}
+
+console.log("\n=== MARCAR COMO LIDO ===");
+marcarComoLido(2, 4);
+
+console.log("\n=== LIVROS LIDOS ===");
+console.log(listarLidos());
+
+console.log("\n=== LIVROS PENDENTES ===");
+console.log(listarPendentes());
