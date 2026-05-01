@@ -39,3 +39,56 @@ function exibirBiblioteca(): void {
 }
 
 exibirBiblioteca();
+
+function adicionarLivro(
+  titulo: string,
+  autor: string,
+  ano: number,
+  numPaginas: number,
+): void {
+  if (ano <= 0 || numPaginas <= 0) {
+    console.log("Ano ou número de páginas inválido.");
+    return;
+  }
+
+  titulos.push(titulo);
+  autores.push(autor);
+  anos.push(ano);
+  paginas.push(numPaginas);
+  lido.push(false);
+  avaliacoes.push(0);
+
+  console.log(`Livro "${titulo}" adicionado com sucesso.`);
+}
+
+function removerLivro(indice: number): void {
+  if (indice < 0 || indice >= titulos.length) {
+    console.log("Índice inválido.");
+    return;
+  }
+
+  titulos.splice(indice, 1);
+  autores.splice(indice, 1);
+  anos.splice(indice, 1);
+  paginas.splice(indice, 1);
+  lido.splice(indice, 1);
+  avaliacoes.splice(indice, 1);
+
+  console.log(`Livro removido com sucesso.`);
+}
+
+console.log("\n--- ESTADO INICIAL ---");
+exibirBiblioteca();
+
+console.log("\n--- ADICIONANDO LIVROS ---");
+adicionarLivro("Livro A", "Autor A", 2024, 300);
+adicionarLivro("Livro B", "Autor B", 2000, 200);
+
+console.log("\n--- APÓS ADIÇÕES ---");
+exibirBiblioteca();
+
+console.log("\n--- REMOVENDO LIVRO ---");
+removerLivro(titulos.length - 1);
+
+console.log("\n--- APÓS REMOÇÃO ---");
+exibirBiblioteca();
