@@ -165,3 +165,56 @@ console.log(listarLidos());
 
 console.log("\n=== LIVROS PENDENTES ===");
 console.log(listarPendentes());
+
+function totalLivros(): number {
+  return titulos.length;
+}
+
+function totalLidos(): number {
+  return lido.filter((status) => status).length;
+}
+
+function percentualLidos(): number {
+  const total = totalLivros();
+  const lidosQtd = totalLidos();
+
+  if (total === 0) return 0;
+
+  return Number(((lidosQtd / total) * 100).toFixed(2));
+}
+
+function mediaAvaliacoes(): number {
+  const avaliacoesValidas = avaliacoes.filter((_, i) => lido[i]);
+
+  if (avaliacoesValidas.length === 0) return 0;
+
+  const soma = avaliacoesValidas.reduce((acc, nota) => acc + nota, 0);
+
+  return Number((soma / avaliacoesValidas.length).toFixed(2));
+}
+
+function livroMaiorAvaliacao(): string {
+  let melhorIndice = -1;
+  let maiorNota = -1;
+
+  avaliacoes.forEach((nota, index) => {
+    if (lido[index] && nota > maiorNota) {
+      maiorNota = nota;
+      melhorIndice = index;
+    }
+  });
+
+  return melhorIndice !== -1 ? titulos[melhorIndice] : "Nenhum";
+}
+
+function totalPaginasLidas(): number {
+  return paginas.filter((_, i) => lido[i]).reduce((acc, p) => acc + p, 0);
+}
+
+console.log("\n=== ESTATÍSTICAS ===");
+console.log("Total de livros:", totalLivros());
+console.log("Livros lidos:", totalLidos());
+console.log("Percentual lidos:", percentualLidos() + "%");
+console.log("Média avaliações:", mediaAvaliacoes());
+console.log("Melhor livro:", livroMaiorAvaliacao());
+console.log("Páginas lidas:", totalPaginasLidas());
