@@ -218,3 +218,26 @@ console.log("Percentual lidos:", percentualLidos() + "%");
 console.log("Média avaliações:", mediaAvaliacoes());
 console.log("Melhor livro:", livroMaiorAvaliacao());
 console.log("Páginas lidas:", totalPaginasLidas());
+
+function exibirPorDecada(): void {
+  console.log("\n=== POR DÉCADA ===");
+
+  const decadas: { [key: number]: string[] } = {};
+
+  titulos.forEach((titulo, index) => {
+    const ano = anos[index];
+    const decada = Math.floor(ano / 10) * 10;
+
+    if (!decadas[decada]) {
+      decadas[decada] = [];
+    }
+
+    decadas[decada].push(titulo);
+  });
+
+  for (const decada in decadas) {
+    console.log(`${decada}s: ${decadas[decada].join(", ")}`);
+  }
+}
+
+exibirPorDecada();
