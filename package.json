@@ -7,7 +7,7 @@
     "dev": "tsc --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Luis Bernardo Pessanha Batista",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
